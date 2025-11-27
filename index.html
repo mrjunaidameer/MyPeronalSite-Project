@@ -482,12 +482,12 @@
                         <form onsubmit="handleFormSubmit(event)" class="space-y-4 sm:space-y-6">
                             <div>
                                 <label for="name" class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-gray-700">Your Name</label>
-                                <input id="name-input" type="text" placeholder="John Doe" required class="w-full p-2 sm:p-3 bg-gray-50 border border-indigo-600/30 rounded-lg text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600/50 text-sm" />
+                                <input id="name-input" type="text" placeholder="Junaid Ameer" required class="w-full p-2 sm:p-3 bg-gray-50 border border-indigo-600/30 rounded-lg text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600/50 text-sm" />
                             </div>
 
                             <div>
                                 <label for="email" class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-gray-700">Your Email</label>
-                                <input id="email-input" type="email" placeholder="john@example.com" required class="w-full p-2 sm:p-3 bg-gray-50 border border-indigo-600/30 rounded-lg text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600/50 text-sm" />
+                                <input id="email-input" type="email" placeholder="junaid@example.com" required class="w-full p-2 sm:p-3 bg-gray-50 border border-indigo-600/30 rounded-lg text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600/50 text-sm" />
                             </div>
 
                             <div>
@@ -503,20 +503,38 @@
                 </div>
                 <script>
                     function handleFormSubmit(e) {
-                        e.preventDefault();
-                        const name = document.getElementById('name-input').value;
-                        const email = document.getElementById('email-input').value;
-                        const message = document.getElementById('message-input').value;
+                      e.preventDefault();
 
-                        const subject = encodeURIComponent(`Inquiry from Website: ${name}`);
-                        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                        
-                        const mailtoLink = `mailto:junaidameerff2@gmail.com?subject=${subject}&body=${body}`;
-                        window.location.href = mailtoLink;
+                      const nameEl = document.getElementById('name-input');
+                      const emailEl = document.getElementById('email-input');
+                      const messageEl = document.getElementById('message-input');
 
-                        document.getElementById('name-input').value = '';
-                        document.getElementById('email-input').value = '';
-                        document.getElementById('message-input').value = '';
+                      const name = (nameEl?.value || '').trim();
+                      const email = (emailEl?.value || '').trim();
+                      const message = (messageEl?.value || '').trim();
+
+                      if (!name || !email || !message) return;
+
+                      const subject = encodeURIComponent(`Inquiry from Website: ${name}`);
+                      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                      const mailtoLink = `mailto:junaidameerff2@gmail.com?subject=${subject}&body=${body}`;
+
+                      // Try opening via a temporary anchor (more reliable than window.open in many browsers)
+                      const a = document.createElement('a');
+                      a.href = mailtoLink;
+                      a.target = '_blank';
+                      a.rel = 'noopener noreferrer';
+                      a.style.display = 'none';
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+
+                      // Clear inputs after a short delay so the mail client can read the link first
+                      setTimeout(() => {
+                        nameEl.value = '';
+                        emailEl.value = '';
+                        messageEl.value = '';
+                      }, 400);
                     }
                 </script>
             </div>
@@ -560,4 +578,3 @@
     </footer>
 </body>
 </html>
-// ...existing code...
