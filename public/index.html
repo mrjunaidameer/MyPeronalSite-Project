@@ -6,7 +6,7 @@
     
     <title>Junaid Ameer | Front-End Dev & UI/UX Specialist</title>
     
-    <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+    <link rel="icon" type="image/jpeg" href="./favicon.jpg" />
     
     <meta name="google-site-verification" content="hSfK34Nmt5svrfkO3_VbVOUQowFbbuY6NO-XhNQzHDQ" />
     
@@ -27,6 +27,17 @@
                         muted: '#f8fafc',
                         'muted-foreground': '#64748b',
                     },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 7s ease-in-out 2s infinite',
+                        'float-fast': 'float 5s ease-in-out 1s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
                 }
             }
         }
@@ -61,7 +72,7 @@
             box-shadow: 0 12px 30px rgba(99,102,241,0.08);
         }
 
-        /* Section heading style - stylish card-like heading */
+        /* Section heading style */
         .section-heading {
             display: inline-flex;
             align-items: center;
@@ -128,6 +139,22 @@
             box-shadow: 0 18px 40px rgba(2,6,23,0.12);
         }
 
+        /* Floating Badge Style */
+        .floating-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #4f46e5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            white-space: nowrap;
+            z-index: 10;
+        }
+
         /* Mobile text wrapping fixes */
         @media (max-width: 768px) {
             .section-heading {
@@ -137,58 +164,16 @@
             .skill-card {
                 padding: 1rem;
             }
-            .skill-card h3 {
-                font-size: 1rem;
-                line-height: 1.4;
-            }
-            .skill-card p {
-                font-size: 0.8rem;
-                line-height: 1.4;
-            }
             .info-bar {
                 padding: 14px;
-            }
-            .info-bar p {
-                font-size: 0.95rem;
-                line-height: 1.5;
             }
         }
 
         @media (max-width: 640px) {
-            body {
-                font-size: 14px;
-            }
-            .section-heading {
-                padding: 6px 10px;
-                gap: 8px;
-                font-size: 1rem;
-            }
-            .section-heading .decor {
-                width: 4px;
-                height: 24px;
-            }
-            .skill-card {
-                padding: 0.9rem;
-            }
-            .skill-card h3 {
-                font-size: 0.95rem;
-            }
-            .skill-card p {
-                font-size: 0.75rem;
-            }
-            .info-bar {
-                padding: 12px;
-                border-left-width: 3px;
-            }
-            .info-bar p {
-                font-size: 0.9rem;
-                line-height: 1.45;
-                margin-bottom: 0.75rem;
-            }
-            .skill-icon {
-                width: 40px;
-                height: 40px;
-            }
+            body { font-size: 14px; }
+            .section-heading { padding: 6px 10px; font-size: 1rem; }
+            .skill-card { padding: 0.9rem; }
+            .floating-badge { padding: 4px 10px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -242,15 +227,29 @@
                             </a>
                         </div>
                     </article>
-                    <div class="flex justify-center lg:justify-start lg:col-span-2">
-                        <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-indigo-600/50">
-                            <img
-                                src="https://i.postimg.cc/SQgKgck2/juni-img.png"
-                                alt="Junaid Ameer - Professional Profile Picture"
-                                class="w-full h-full object-cover"
-                            />
+                    
+                    <div class="flex justify-center lg:justify-start lg:col-span-2 relative">
+                        <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                            <div class="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-indigo-600/50">
+                                <img
+                                    src="https://i.postimg.cc/SQgKgck2/juni-img.png"
+                                    alt="Junaid Ameer - Professional Profile Picture"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            <div class="floating-badge top-4 -right-2 animate-float">
+                                💻 Web Dev
+                            </div>
+                            <div class="floating-badge bottom-8 -left-2 animate-float-delayed">
+                                🔒 Security
+                            </div>
+                            <div class="floating-badge bottom-4 right-4 animate-float-fast">
+                                🎨 UI/UX
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="grid grid-cols-3 gap-3 sm:gap-6 mt-10 sm:mt-16 text-center max-w-4xl mx-auto">
@@ -365,21 +364,20 @@
                     </p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
-                    
-                    <div class="bg-white rounded-xl overflow-hidden card-style group">
-                        <div class="overflow-hidden aspect-video">
-                            <img src="junaidameerproject.png" alt="Vulnerax AI Scanner" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                 <div class="bg-white rounded-xl overflow-hidden card-style group">
+                        <div class="h-40 sm:h-48 overflow-hidden">
+                            <img src="https://i.postimg.cc/qRg9fn31/vulnerax.png" alt="vulnerax" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
                         </div>
                         <div class="p-4 sm:p-6 space-y-3 sm:space-y-4">
-                            <span class="text-xs font-medium uppercase tracking-wider text-red-600 bg-red-50 px-3 py-1 rounded-full inline-block">AI & Security</span>
-                            <h3 class="text-lg sm:text-xl font-bold text-gray-900">Vulnerax</h3>
-                            <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">An advanced AI real-time vulnerability scanner designed to detect and analyze web security threats instantly.</p>
+                            <span class="text-xs font-medium uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full inline-block">Web Development</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900">vulnerax</h3>
+                            <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">A Advanced Ai Powered Platform for Advance Web Vulnerability Scanner.</p>
                             <a href="https://vulnerax.junaidprojects.site" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors flex items-center text-sm">
                                 Visit Project <i data-lucide="external-link" class="ml-2 w-4 h-4"></i>
                             </a>
                         </div>
-                    </div>
-
+                    </div>   
+                    
                     <div class="bg-white rounded-xl overflow-hidden card-style group">
                         <div class="h-40 sm:h-48 overflow-hidden">
                             <img src="https://i.postimg.cc/nV9cyDmn/Screenshot-2025-10-31-095702.png" alt="PrepHub Project Screenshot" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
